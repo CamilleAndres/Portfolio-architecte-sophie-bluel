@@ -1,5 +1,6 @@
 // Élements DOM
 const gallery = document.querySelector(".gallery");
+const filters = document.querySelector(".filters");
 
 
 // Fonction général
@@ -20,6 +21,15 @@ async function getWorks() {
     }
 }
 
+async function getCategories() {
+    try {
+        const categoriesResponse = await fetch("http://localhost:5678/api/categories");
+        return categoriesResponse.json();
+    } catch (error) {
+        console.log("Erreur lors de la récupération des catégories depuis l'API")
+    }
+}
+
 // Affichage de la gallerie
 
 async function displayWorks(categorieId) {
@@ -28,7 +38,7 @@ async function displayWorks(categorieId) {
         gallery.innerHTML = "";
         // Création de l'affichage dans la gallerie
         addWorks.forEach((works) => {
-            if (categorieId == works.categorieId || categorieId == null) {
+            if (categoryId == works.categoryId || categoryId == null) {
                 createWorks(works);
             }
         });
@@ -40,11 +50,11 @@ async function displayWorks(categorieId) {
 // Création des projets de la gallerie
 
 function createWorks(works) {
-    const figure = document.createElement ("figure");
-    const img = document.createElement ("img");
-    const figcaption = document.createElement ("figcaption");
+    const figure = document.createElement("figure");
+    const img = document.createElement("img");
+    const figcaption = document.createElement("figcaption");
 
-    figure.setAttribute = works.categorieId;
+    figure.setAttribute = works.categoryId;
     img.src = works.imageURL;
     figcaption.innerText = works.tittle;
 
@@ -52,3 +62,23 @@ function createWorks(works) {
     figure.appendChild(figcaption);
     gallery.appendChild(figure);
 }
+
+// Affichage des bouttons filtres
+
+async function btnFilters() {
+    const addCategories = await getCategories();
+
+    addCategories.forEach((category) => {
+        createCategories()
+    })
+}
+
+// Création des bouttons filtres
+
+function createCategories(categories) {
+    const filters = document.createElement("button");
+    filters.innerText = category.name;
+    filters.classList.setAttribute("filterBtn");
+    filters.setAttribute(category.Id);
+}
+
