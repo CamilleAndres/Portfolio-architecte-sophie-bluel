@@ -32,13 +32,13 @@ async function getCategories() {
 
 // Affichage de la gallerie
 
-async function displayWorks(categorieId) {
+async function displayWorks() {
     try {
-        const addWorks = await getWorks();
+        const dataWorks = await getWorks();
         gallery.innerHTML = "";
         // Création de l'affichage dans la gallerie
-        addWorks.forEach((works) => {
-            if (categoryId == works.categoryId || categoryId == null) {
+        dataWorks.forEach((works) => {
+            if (i = getWorks) {
                 createWorks(works);
             }
         });
@@ -66,9 +66,9 @@ function createWorks(works) {
 // Affichage des bouttons filtres
 
 async function btnFilters() {
-    const addCategories = await getCategories();
+    const dataCategoriesCategories = await getCategories();
 
-    addCategories.forEach((category) => {
+    dataCategories.forEach((categories) => {
         createCategories()
     })
 }
@@ -78,7 +78,8 @@ async function btnFilters() {
 function createCategories(categories) {
     const filters = document.createElement("button");
     filters.innerText = category.name;
-    filters.classList.setAttribute("filterBtn");
+    filters.classList = ("filterBtn");
+    filters.appendChild(filterBtn);
     filters.setAttribute(category.Id);
 }
 
